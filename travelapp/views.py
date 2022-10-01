@@ -3,11 +3,8 @@ from django.shortcuts import render
 from . models import Place
 # Create your views here.
 def fun(request):
-    obj = Place()
-    obj.name = "kerala"
-    obj.desc = "God's own country"
-    obj.price = 1000
-    return  render(request,'index.html' , {'result':obj})
+    obj = Place.objects.all()
+    return  render(request,'index.html' , {'results':obj})
 
 def add(request):
     num1 = int(request.POST['num1'])
