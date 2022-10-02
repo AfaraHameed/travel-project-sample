@@ -1,4 +1,4 @@
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
@@ -32,3 +32,20 @@ def register(request):
         return redirect('/')
     else:
         return render(request,'registration.html')
+def login(request):
+    if request.method=='POST':
+        username = request.POST['username']
+        password = request.POST['password1']
+        user = auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            return redirect('/')
+        else:
+            messages.info(request,"invalid details")
+            return redirect('login')
+    else:
+        return render(request,'login.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
