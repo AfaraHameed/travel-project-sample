@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('',views.fun,name='fun'),
+    path('',views.first_load,name='first_load'),
     path('add',views.add,name = 'addition')
 ]
